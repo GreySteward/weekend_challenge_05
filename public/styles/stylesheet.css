@@ -1,0 +1,66 @@
+body {
+    background-image: url(http://image.shutterstock.com/z/stock-vector-animals-background-137611946.jpg);
+    background-repeat: no repeat;
+    background-size: 100%;
+    color: #2028d9;
+    fill-opacity: .2;
+}
+header, footer, main{
+    color: #2e6da4;
+    text-align: center;
+
+
+}
+h1 {
+    font-size: 64px;
+    text-align: center;
+    text-shadow: 2px 2px #A7BCCA;
+    font-family: 'Merriweather', sans-serif;
+}
+header {
+    font-size: 12px;
+    padding-top: 25px;
+    text-shadow: 2px 2px #A7BCCA;
+    font-family: 'Merriweather', sans-serif;
+    text-align: center;
+
+}
+
+a {
+    color: #000;
+    background-color: #A7BCCA;
+    font-size: 16px;
+}
+main {
+    color: #402cf0;
+    text-align: center;
+    font-family: 'Merriweather', serif;
+
+
+}
+
+footer{
+    color: #A7BCCA;
+    text-align: center;
+    font-size: 36px;
+    padding-top: 150px;
+    font-family: 'Merriweather', sans-serif;
+    text-shadow: 2px 2px #ca0e26;
+}
+.dogs {
+    height: 25%;
+    width: 25%;
+    border: solid 5px #000;
+
+
+}
+.cats {
+    height: 25%;
+    width: 25%;
+    border: solid 5px #000;
+}
+.birds {
+    height: 25%;
+    width: 25%;
+    border: solid 5px #000;
+}

@@ -1,20 +1,59 @@
-myApp.controller('PeopleController', ['$scope', '$http, ''DataFactory', function($scope, $http, DataFactory) {
-    console.log('People Controller');
+var express = require('express');
+var app = express();
+var router = express.Router();
+var bodyParser = require('body-parser');
+var pg = require('pg');
+var results = '';
 
-    $scope.message = 'People Controller!';
-    $scope.people = [];
-    $scope.personName = '';
-    $scope.dataFactory = DataFactory;
+var connectionString ='';
 
-    $scope.people = $scope.dataFactory.peopleData();
+if(process.env.DATABASE_URL != undefined) {
+    connectionString = process.enn.DATABASE_URL + 'ssl';
+} else {
+    connectionString = 'postgres://localhost:5432/weekend_challenge_05';
+}
 
-    $scope.addPerson = function() {
-        console.log($scope.personName);
-        $scope.dataFactory.addName($scope.personName);
+router.get('/', function(req, res) {
+    var results = [];
+    pg.connect(connectionString, function(err, client, done) {
+        var query = client.query('SELECT * FROM customers');
 
-        $scope.personName = '';
+        query.on('row', function(row) {
+            results.push(row);
+            console.log(results);
+        });
 
-        //$scope.people = $scope.dataFactory.peopleData();
-    }
+        query.on('end', function() {
+            client.end();
+            console.log(results);
+            return res.json(results);
+        });
 
-}]);
+        if(err) {
+            console.log(err);
+        }
+    });
+});
+
+router.post('/', function(req, res) {
+    var results = [];
+    pg.connect(connectionString, function(err, client, done) {
+        var query = client.query('INSERT * FROM customers JOIN addresses ON customers.id = addresses.customer_id JOIN orders ON addresses.customer_id = orders.address_id');
+
+        query.on('row', function(row) {
+            results.push(row);
+            console.log(results);
+        });
+
+        query.on('end', function() {
+            client.end();
+            return res.json(results);
+        });
+
+        if(err) {
+            console.log(err);
+        }
+    });
+});
+
+module.exports = router;

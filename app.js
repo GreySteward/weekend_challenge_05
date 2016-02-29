@@ -1,17 +1,18 @@
-var express = require('express');
+var express = require("express");
 var app = express();
-var bodyParser = require('body-parser');
+var path = require('path');
+var data = require('./server/routes/favPet');
+//var data = require('./server/routes/findPet');
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
 
-app.get('/data', function(req, res) {
-    res.send({message: 'hello'});
-});
+//app.get("/*", function(req,res,next){
+//    var file = req.params[0] || "views/index.html";
+//    res.sendFile(path.join(__dirname, "./public/", file))
+//});
 
-app.post('/data/:number', function(req, res) {
-    res.send(req.params.number);
-});
+//app.post('/data/:number', function(req, res) {
+//    res.send(req.params.number);
+//});
 
 // Serve back static files
 app.use(express.static('public'));
@@ -24,3 +25,6 @@ app.set('port', process.env.PORT || 5000);
 app.listen(app.get('port'), function() {
     console.log('Listening on port: ', app.get('port'));
 });
+
+
+module.exports = app;

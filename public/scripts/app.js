@@ -3,11 +3,6 @@ var myApp = angular.module('myApp', ['ngRoute']);
 myApp.config(['$routeProvider', function($routeProvider) {
 
     $routeProvider
-
-        .when('/home', {
-            templateUrl: '/views/templates/home.html'
-        })
-
         .when('/findpet', {
             templateUrl: '/views/templates/findpet.html',
             controller: 'AnimalController'
@@ -17,6 +12,6 @@ myApp.config(['$routeProvider', function($routeProvider) {
             controller: 'FavoritesController'
         })
         .otherwise({
-            redirectTo: 'home'
+            redirectTo: 'findpet'
         });
 }]);

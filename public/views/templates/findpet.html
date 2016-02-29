@@ -4,15 +4,13 @@
 <div class="find-pet">
 
     <h2>Find a Pet</h2>
-        <form action="action_page.php" ng-change() ng-model="animal">
-            <select name="favorite animal">
+        <form>
+            <select ng-model="animal" ng-change="storeAnimal()">
                 <option value="dog">Dogs</option>
                 <option value="cat">Cats</option>
                 <option value="bird">Birds</option>
-                <option value="rabbit">Rabbits</option>
-                <option value="small & furry">Small & Furry</option>
                 <option value="horse">Horses</option>
-                <option value="Exotic">Scales, Fins & Other</option>
+                <option value="reptile">Scales, Fins & Other</option>
                 <option value="pig">Pigs</option>
                 <option value="barnyard">Barnyard</option>
             </select>

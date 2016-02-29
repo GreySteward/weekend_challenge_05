@@ -1,5 +1,7 @@
-myApp.controller('', ['$scope', '$http', function($scope, $http) {
+myApp.controller('AnimalController', ['$scope', '$http', function($scope, $http) {
     $scope.data = {};
+
+    $scope.animal= "";
 
 
     $scope.storeAnimal = function() {
@@ -8,7 +10,7 @@ myApp.controller('', ['$scope', '$http', function($scope, $http) {
         petFinder(animalType);
     };
 
-    function petFinder() {
+    function petFinder(animalType) {
         //api key
         var key = '497e876e57e808b290190688905fccd4';
 
@@ -20,7 +22,7 @@ myApp.controller('', ['$scope', '$http', function($scope, $http) {
         var baseURL = 'http://api.petfinder.com/';
         var query = 'pet.getRandom';
         query += '?key=' + key;
-        query += '&animal=animalType';
+        query += '&animal=' + animalType;
         query += '&output=basic';
         query += '&format=json';
 

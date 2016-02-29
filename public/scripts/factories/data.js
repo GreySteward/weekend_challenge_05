@@ -19,14 +19,14 @@ myApp.factory('DataFactory', ['$http', function($http) {
 
     //PUBLIC
     var publicApi = {
-        factoryPeopleData: function() {
+        animalData: function() {
             return people;
         },
-        factoryRetrieveData: function() {
+        retrieveData: function() {
             return getData();
         },
-        factoryAddName: function(name) {
-            addPerson(name);
+        addName: function(name) {
+            addAnimal(name);
         }
     };
 

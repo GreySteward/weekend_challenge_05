@@ -2,19 +2,12 @@ var express = require("express");
 var app = express();
 var path = require('path');
 var data = require('./server/routes/favPet');
-//var data = require('./server/routes/findPet');
+var bodyParser = require('body-parser');
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
 
-//app.get("/*", function(req,res,next){
-//    var file = req.params[0] || "views/index.html";
-//    res.sendFile(path.join(__dirname, "./public/", file))
-//});
-
-//app.post('/data/:number', function(req, res) {
-//    res.send(req.params.number);
-//});
-
-// Serve back static files
+app.use('/favanimal', data);
 app.use(express.static('public'));
 app.use(express.static('public/views'));
 app.use(express.static('public/scripts'));

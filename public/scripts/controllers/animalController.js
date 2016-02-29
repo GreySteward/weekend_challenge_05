@@ -11,6 +11,7 @@ myApp.controller('AnimalController', ['$scope', '$http', function($scope, $http)
     };
 
     function petFinder(animalType) {
+        console.log(animalType);
         //api key
         var key = '497e876e57e808b290190688905fccd4';
 
@@ -38,4 +39,10 @@ myApp.controller('AnimalController', ['$scope', '$http', function($scope, $http)
     }
 
     petFinder();
+
+    $scope.addFavorites = function(animal) {
+        console.log(animal);
+        $http.post('/favanimal', animal);
+    };
+
 }]);

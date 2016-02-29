@@ -1,22 +1,23 @@
 var express = require('express');
 var app = express();
 var router = express.Router();
-var bodyParser = require('body-parser');
 var pg = require('pg');
-var results = '';
+
 
 var connectionString ='';
 
+
+
 if(process.env.DATABASE_URL != undefined) {
-    connectionString = process.enn.DATABASE_URL + 'ssl';
+    connectionString = process.env.DATABASE_URL + 'ssl';
 } else {
-    connectionString = 'postgres://localhost:5432/weekend_challenge_05';
+    connectionString = 'postgres://localhost:5432/chrisgibson';
 }
 
 router.get('/', function(req, res) {
     var results = [];
     pg.connect(connectionString, function(err, client, done) {
-        var query = client.query('SELECT * FROM customers');
+        var query = client.query('SELECT * FROM fav_pet');
 
         query.on('row', function(row) {
             results.push(row);
@@ -35,25 +36,23 @@ router.get('/', function(req, res) {
     });
 });
 
-router.post('/', function(req, res) {
-    var results = [];
-    pg.connect(connectionString, function(err, client, done) {
-        var query = client.query('INSERT * FROM customers JOIN addresses ON customers.id = addresses.customer_id JOIN orders ON addresses.customer_id = orders.address_id');
+    router.post('/', function (req, res) {
+        console.log(req.body);
+        var results = [];
+        pg.connect(connectionString, function (err, client, done) {
+            var query = client.query('INSERT INTO fav_pet (pet_id, pet_name, pet_image_url, pet_desc_100_char) VALUES ($1, $2, $3, $4)',[req.body.id.$t, req.body.name.$t, req.body.media.photos.photo[0].$t, req.body.description.$t]);
 
-        query.on('row', function(row) {
-            results.push(row);
-            console.log(results);
+            query.on('end', function () {
+                client.end();
+                return res.sendStatus(200);
+            });
+
+            if (err) {
+                console.log(err);
+            }
         });
 
-        query.on('end', function() {
-            client.end();
-            return res.json(results);
-        });
-
-        if(err) {
-            console.log(err);
-        }
     });
-});
+
 
 module.exports = router;
